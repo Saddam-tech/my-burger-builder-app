@@ -48,6 +48,10 @@ class BurgerBuilder extends Component {
     this.setState({ purchasing: true })
   }
 
+  backdropCancelHandler = () => {
+    this.setState({ purchasing: false });
+  }
+
   addIngredientHandler = (type) => {
     const oldCount = this.state.ingredients[type];
     const updatedCount = oldCount + 1;
@@ -90,7 +94,7 @@ class BurgerBuilder extends Component {
     }
     return (
       <Aux>
-        <Modal show={this.state.purchasing}>
+        <Modal show={this.state.purchasing} BackdropClosed={this.backdropCancelHandler}>
           <OrderSummary 
           ingredients={this.state.ingredients}/>
         </Modal>
