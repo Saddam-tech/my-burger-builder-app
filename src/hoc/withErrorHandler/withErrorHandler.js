@@ -9,19 +9,28 @@ const withErrorHandler = (WrappedComponent, axios) => {
       error: null,
     };
 
-    componentDidMount() {
+    UNSAFE_componentWillMount() {
+       
       axios.interceptors.request.use((req) => {
-        this.setState({ error: null });
+        this.setState({ error: null })
+        return req;
       });
-      axios.interceptors.response.use(null, (error) => {
+      axios.interceptors.response.use(res => res, (error) => {
         this.setState({ error: error });
       });
+       
     }
+
+    errorConfirmedHandler = () => {
+      this.setState({ error: null });
+    };
 
     render() {
       return (
         <Aux>
-          <Modal show={this.state.error}>Something didn`t work!</Modal>
+          <Modal show={this.state.error} BackdropClosed={this.errorConfirmedHandler}>
+            {this.state.error ? this.state.error.message: null}
+          </Modal>
           <WrappedComponent {...this.props} />
         </Aux>
       );
