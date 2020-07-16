@@ -35,7 +35,7 @@ class Orders extends Component {
             <Order 
             key={order.id}
             ingredients={order.ingredients}
-            price={order.price}
+            price={ order.price}
             />
         ))}
       </div>
