@@ -15,6 +15,12 @@ class ContactData extends Component {
           placeholder: "Your Name",
         },
         value: "",
+        validation: {
+          required: true,
+          minLength: 5,
+          maxLength: 5
+        },
+        valid: false
       },
       street: {
         elementType: "input",
@@ -23,6 +29,11 @@ class ContactData extends Component {
           placeholder: "Street",
         },
         value: "",
+        validation: {
+          required: true
+        },
+        valid: false
+        
       },
       zipCode: {
         elementType: "input",
@@ -31,6 +42,10 @@ class ContactData extends Component {
           placeholder: "ZIP Code",
         },
         value: "",
+        validation: {
+          required: true
+        },
+        valid: false
       },
       country: {
         elementType: "input",
@@ -39,6 +54,10 @@ class ContactData extends Component {
           placeholder: "Country",
         },
         value: "",
+        validation: {
+          required: true
+        },
+        valid: false
       },
 
       email: {
@@ -48,6 +67,10 @@ class ContactData extends Component {
           placeholder: "Your E-mail",
         },
         value: "",
+        validation: {
+          required: true
+        },
+        valid: false
       },
 
       deliveryMethod: {
@@ -58,12 +81,31 @@ class ContactData extends Component {
             { value: "cheapest", displayValue: "Cheapest" },
           ],
         },
-        value: "",
+        value: ""
       },
 
       loading: false,
     },
   };
+
+  checkValidity(value, rules) {
+    
+    let isValid = true;
+    
+    if (rules.required) {
+      isValid = value.trim() !== '' && isValid;
+    }
+
+    if (rules.minLength) {
+      isValid = value.length >= rules.minLength && isValid;
+    }
+
+    if (rules.maxLength) {
+      isValid = value.length <= rules.maxLength && isValid;
+    }
+
+    return isValid;
+  }
 
   orderHandler = (event) => {
     event.preventDefault();
@@ -98,6 +140,8 @@ class ContactData extends Component {
       ...updatedOrderForm[inputIdentifier]
     };
     updatedFormElement.value = event.target.value;
+    updatedFormElement.valid = this.checkValidity(updatedFormElement.value, updatedFormElement.validation)
+    console.log(updatedFormElement);
     updatedOrderForm[inputIdentifier] = updatedFormElement;
     this.setState({orderForm: updatedOrderForm})
 
