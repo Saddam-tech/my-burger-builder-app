@@ -12,7 +12,7 @@ const input = (props) => {
 
   switch (props.elementType) {
     case "input":
-      inputElement = (
+      inputElement = ( 
         <input
           {...props.elementConfig}
           className={inputClasses.join(' ')}
