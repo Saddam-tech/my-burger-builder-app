@@ -17,8 +17,8 @@ state = {
   sideDrawerToggleHandler = () => {
      this.setState((prevState) => {
        return {showSideDrawer: !prevState.showSideDrawer};
-     });
-  }
+     })
+  };
 
 
 
