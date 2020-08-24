@@ -26,7 +26,7 @@ class Checkout extends Component {
 
         <Route
           path={this.props.match.path + "/contact-data"}
-          componen={ContactData}
+          component={ContactData}
         />
       </div>
     );
