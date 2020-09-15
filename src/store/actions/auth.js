@@ -62,4 +62,4 @@ export const auth = (email, password, isSignUp) => {
         dispatch(authFail(err.response.data.error));
       });
   };
-};
+}; 
