@@ -30,7 +30,7 @@ const authFail = (state, action) => {
 };
 
 const setAuthRedirectPath = (state, action) => {
-  updateObject(state, {
+  return updateObject(state, {
     authRedirectPath: action.path,
   });
 };
