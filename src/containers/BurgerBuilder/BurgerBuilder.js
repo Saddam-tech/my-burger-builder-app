@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState, useEffect  } from "react";
 import { connect } from "react-redux";
 import Aux from "../../hoc/Aux/Aux";
 import Burger from "../../components/Burger/Burger";
@@ -11,22 +11,19 @@ import withErrorHandler from "../../hoc/withErrorHandler/withErrorHandler";
 //import * as actionTypes from '../../store/actions/actionTypes';
 import * as actions from "../../store/actions/index";
 
-class BurgerBuilder extends Component {
+const burgerBuilder = () => {
   // constructor(props) {
   //     super(props);
   //     this.state = {...}
   // }
 
-  state = {
-    purchasing: false,
-  };
+  const [purchasing, setPurchasing] = useState(false);
 
-  componentDidMount() {
-    console.log(this.props);
-    this.props.onInitIngredients();
-  }
+  useEffect(() => {
+    props.onInitIngredients();
+  }, []);
 
-  updatePurchaseState(ingredients) {
+  const updatePurchaseState = (ingredients) =>  {
     const sum = Object.keys(ingredients)
       .map((igKey) => {
         return ingredients[igKey];
@@ -38,7 +35,7 @@ class BurgerBuilder extends Component {
     return sum > 0;
   }
 
-  purchaseHandler = () => {
+  const purchaseHandler = () => {
     if (this.props.isAuthenticated) {
       this.setState({ purchasing: true });
     } else {
@@ -47,11 +44,11 @@ class BurgerBuilder extends Component {
     }
   };
 
-  backdropCancelHandler = () => {
+  const backdropCancelHandler = () => {
     this.setState({ purchasing: false });
   };
 
-  purchaseContinueHandler = () => {
+  const purchaseContinueHandler = () => {
     this.props.onInitPurchase();
     this.props.history.push("/checkout");
   };
